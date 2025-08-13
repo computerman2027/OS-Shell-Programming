@@ -4,6 +4,9 @@
 echo "MENU"
 echo "1) Merge 2 files into another"
 echo "2) Search a pattern from a file"
+echo "3) Exit"
+while true
+do
 echo "Enter your Choice: \c"
 read ch
 
@@ -37,8 +40,14 @@ case "$ch" in
         echo "Error: File not found"
     fi
     ;;
+3)
+	echo "Exiting"
+	exit 1
+	;;
 
 *)
     echo "INVALID CHOICE"
     ;;
 esac
+
+done

@@ -1,45 +1,33 @@
-echo -e "MENU\n1) Number of presently active users\n2) displaying desired number of lines from top of the file\n3) Updating access time of a given file to current time\nenter your choice : "
+# this is bash version. not compatible with all shell 
 
-read choice
+echo "MENU\n1) Merge 2 files into another\n2) search a pattern from a file\nEnter your Choice : "
 
-case $choice in
-    1)
-        n=`who | wc -l `
-        echo "number of active users = $n"
-        ;;
-    2)
-        echo "Enter file name : "
-        read filename
+read ch
 
-        if [[ ! -f $filename ]];
-        then 
-            echo "Error : file not found "
-            exit 1
-        fi
+case $ch in
+1) read -p "Enter first file name : " f1
+    read -p "Enter Second file name : " f2
+    read -p "Enter New file name : " fnew
+    # echo "$f1 , $f2";;
 
-        echo "enter no of lines : "
-        read nooflines
+    if [ -f "$f1" ] && [ -f "$f2" ]; then
+        cat "$f1" "$f2" > "$fnew"
+        echo "File merged successfully in $fnew"
+    else
+        echo "Error Occured"
+    fi
+    ;;
 
-        head -"$nooflines" "$filename"
-        ;;
-    3)
-        echo "Enter file name : "
-        read filename
+2) read -p "Enter file name : " fl
+     read -p "Enter pattern : " p
 
-        if [[ ! -f $filename ]];
-        then 
-            echo "Error : file not found "
-            exit 1
-        fi
+     if [ -f "$fl" ]; then
+        count=$(grep -o "$p" "$fl" | wc -l)
+        echo "Pattern $p found $count times in $fl"
+    else
+        echo "Error : File not found"
+    fi
+    ;;
 
-        echo "Old Access time = $(stat -c %x $filename)"
-        touch "$filename"
-
-        echo "Access time updated for $filename"
-        echo "new Access time = $(stat -c %x $filename)"
-
-        ;;
-    *)
-        echo "INVALID INPUT"
-        ;;
-esac 
+*) echo "INVALID CHOICE";;
+esac
