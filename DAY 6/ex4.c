@@ -6,7 +6,7 @@ void main()
 {
 	char* tem[4];
 	// tem[0]= "/home/exam/CSE39/LAB PROGRAM/c";
-	tem[0] = "/home/ins/5th sem/OS-Shell-Programming/DAY 5/c";
+	tem[0] = "/home/ins/5th sem/OS-Shell-Programming/DAY 6/c";
 	tem[1] = "hello";
 	tem[2] = "world";
 	tem[3]= (char*)0;
